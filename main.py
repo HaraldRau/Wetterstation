@@ -1,0 +1,17 @@
+oledssd1306.init_display()
+BME280.power_on()
+BME280.address(BME280_I2C_ADDRESS.ADDR_0X76)
+
+def on_forever():
+    oledssd1306.set_text_xy(0, 0)
+    oledssd1306.write_string("Temperatur:")
+    oledssd1306.set_text_xy(1, 0)
+    oledssd1306.write_number(BME280.temperature(BME280_T.T_C))
+    oledssd1306.write_string(" °C")
+    oledssd1306.set_text_xy(3, 0)
+    oledssd1306.write_string("Luftdruck:")
+    oledssd1306.set_text_xy(4, 0)
+    oledssd1306.write_number(BME280.pressure(BME280_P.H_PA))
+    oledssd1306.write_string(" hPa")
+    basic.pause(1000)
+basic.forever(on_forever)
